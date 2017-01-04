@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul li{float: left;width: 200px;}
+        ul li span{float: left;}
+        ul li  span.suc{width: 50%;background-color: #65d069;height: 3px;margin-top: 11px;}
+        ul li  span.default{width: 50%;background-color: #eeeeee;height: 3px;margin-top: 11px;}
+        ul li  span.no{width: 50%;background-color: transparent;height: 3px;margin-top: 11px;}
+        ul li span.err{width: 50%;background-color: red;height: 3px;margin-top: 11px;}
+        ul li p{height: 26px;line-height: 26px;margin: 4px 0 ;}
+        ul li p.clearfix{position: relative;}
+        .text-center{text-align: center;}
+        ul li span.bg-suc{width: 26px;height: 26px;position: absolute;left: 50%;top:50%;margin-left: -13px;margin-top: -13px;background: url(icon-pos.png) no-repeat 0 -660px;}
+        ul li span.bg-default{width: 26px;height: 26px;position: absolute;left: 50%;top:50%;margin-left: -13px;margin-top: -13px;background: url(icon-pos.png) no-repeat 0 -720px;}
+        ul li span.bg-err{width: 26px;height: 26px;position: absolute;left: 50%;top:50%;margin-left: -13px;margin-top: -13px;background: url(icon-pos.png) no-repeat 0 -690px;}
+        .clearfix:before{content:"";display: block;clear: both;}
+        .clearfix:after{content:"";display: block;clear: both;}
+    </style>
+</head>
+<body>
+<ul class="clearfix">
+    <li>
+        <p class="text-center">下单</p>
+        <p class="clearfix">
+            <span class="no fl"></span>
+            <span class="suc fl"></span>
+            <span class="bg-suc fl"></span>
+        </p>
+        <p class="text-center">2016-12-02 18:20:35</p>
+    </li>
+    <li>
+        <p class="text-center">下单</p>
+        <p class="clearfix">
+            <span class="err fl"></span>
+            <span class="err fl"></span>
+            <span class="bg-err fl"></span>
+        </p>
+        <p class="text-center">2016-12-02 18:20:35</p>
+    </li>
+    <li>
+        <p class="text-center">下单</p>
+        <p class="clearfix">
+            <span class="default fl"></span>
+            <span class="no fl"></span>
+            <span class="bg-default fl"></span>
+        </p>
+        <p class="text-center">2016-12-02 18:20:35</p>
+    </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Highcharts Example</title>
+
+    <script type="text/javascript" src="http://cdn.hcharts.cn/jquery/jquery-1.8.3.min.js"></script>
+    <style type="text/css">
+        /*${demo.css}*/
+        .gray{color: gray;}
+        .f44{font-size: 44px;}
+        .f20{font-size: 20px;}
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            var chartPie = Highcharts.chart('container', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                exporting: {
+                    enabled: false
+                },
+                title: {
+                    text: ""
+                    //text: 'Browser market shares January, 2015 to May, 2015'
+                },
+                tooltip: {
+                    pointFormat: ''//'{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        // 中间镂空
+                        innerSize: '60%',
+                        colors: ["#ffbc0b","#00b9f3","#32af4a","#ff5a88","#af66d9","#13d89e"],
+                        //slicedOffset: 10,
+                        dataLabels: {
+                            enabled: false,// true
+                            format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        },
+                        events: {
+                            click: function(p){
+                                $("#containerText").html('<span class="f44">'+p.point.y + '</span><br><span class="gray f20">'+ p.point.name+'</span>');
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Brands',
+                    colorByPoint: true,
+                    data: [{
+                        name: 'IE',
+                        y: 56.33,
+                        b: 2
+                    }, {
+                        name: 'Chrome',
+                        y: 24.03/*,
+                         sliced: true,
+                         selected: true*/
+                    }, {
+                        name: 'Firefox',
+                        y: 10.38
+                    }, {
+                        name: 'Safari',
+                        y: 4.77
+                    }, {
+                        name: 'Opera',
+                        y: 0.91
+                    }]
+                }]
+            });
+            $("#containerText").html('<span class="f44">'+chartPie.series[0].data[0].y + '</span><br><span class="gray f20">'+ chartPie.series[0].data[0].name+'</span>');
+            $("#J_BtnSelectIE").mouseover(function(){
+                if(!chartPie.series[0].data[0].selected)
+                    chartPie.series[0].data[0].select();
+                $("#containerText").html('<span class="f44">'+chartPie.series[0].data[0].y + '</span><br><span class="gray f20">'+ chartPie.series[0].data[0].name+'</span>');
+            });
+        });
+    </script>
+</head>
+<body>
+<script src="highcharts.js"></script>
+<script src="exporting.js"></script>
+
+<div id="container" style="min-width: 300px; height: 300px; max-width: 300px; margin: 0 auto">
+</div>
+<div id="containerText" style="position: absolute; width: 120px; height: 60px; text-align: center; left: 50%; margin-left: -60px; top: 120px;">123</div>
+<button id="J_BtnSelectIE">选择ie</button>
+
+</body>
+</html>

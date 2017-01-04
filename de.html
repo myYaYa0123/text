@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>001轮播</title>
+    <script src="jquery-1.12.4.min.js"></script>
+    <style>
+        * {  padding: 0;  margin: 0;  }
+        a {  text-decoration: none;  }
+        ul {  list-style: none;  }
+        .slider, .slider-extra, .slider-panel img {
+            width: 100%;
+            height: 413px;
+        }
+        .slider {
+            margin: 30px auto;
+            text-align: center;
+            position: relative;
+        }
+        .slider-panel, .slider-nav {
+            position: absolute;
+            z-index: 8;
+        }
+        .slider-panel img {
+            border: none;
+        }
+        .slider-extra {
+            position: relative;
+        }
+        .slider-nav {
+            margin-left: -51px;
+            left: 50%;
+            bottom: 4px;
+        }
+        .slider-nav li {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            line-height: 18px;
+            border-radius: 50%;
+            text-align: center;
+            margin: 0 2px;
+            color: transparent;
+            background: #ffffff;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .slider-nav .slider-item-selected {
+            background: #eeeeee;
+        }
+    </style>
+</head>
+<body>
+<div class="slider">
+    <ul class="slider-main">
+        <li class="slider-panel"><a href="#"><img src="img/banner1.jpg" alt="001"></a></li>
+        <li class="slider-panel"><a href="#"><img src="img/banner2.jpg" alt="001"></a></li>
+    </ul>
+    <div class="slider-extra">
+        <ul class="slider-nav">
+            <li class="slider-item slider-item-selected">1</li>
+            <li class="slider-item">2</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        var currentIndex = 0,
+                interval,
+                hasStarted = false,   //是否已经开始轮播
+                t = 3000;           //轮播时间间隔
+        length = $('.slider-panel').length;   //轮播图片的长度，即有几张图
+
+        $('.slider-panel:not(:first)').hide();  //除了第一张图片其他全部隐藏
+
+
+
+
+        $('.slider-item').hover(function (e) {
+            stop();
+            var preIndex = $('.slider-item').filter('.slider-item-selected').index();
+            var currentIndex = $(this).index();
+            play(preIndex,currentIndex);
+        }, function () {
+            start();
+        });
+
+        /* 向前翻页 */
+        function pre() {
+            var preIndex = currentIndex;
+            currentIndex = (--currentIndex + length) % length;
+            play(preIndex,currentIndex);
+        }
+        /* 向前翻页 */
+        function next() {
+            var preIndex = currentIndex;
+            currentIndex = ++currentIndex % length;
+            play(preIndex,currentIndex);
+        }
+        /*
+         * 从preIndex页翻到currentIndex页
+         * preIndex整数，翻页的起始页
+         * currentIndex整数，翻到的那页
+         * */
+        function play(preIndex, currentIndex) {
+            $('.slider-panel').eq(preIndex).fadeOut(500)
+                    .parent().children().eq(currentIndex).fadeIn(1000);
+            $('.slider-item').removeClass('slider-item-selected')
+                    .eq(currentIndex).addClass('slider-item-selected');
+        }
+        /* 开始轮播 */
+        function start() {
+            if (!hasStarted){
+                hasStarted = true;
+                interval = setInterval(next,t);
+            }
+        }
+        /* 停止轮播 */
+        function stop() {
+            clearInterval(interval);
+            hasStarted = false;
+        }
+        start();   //开始轮播
+    });
+</script>
+</body>
+</html>
